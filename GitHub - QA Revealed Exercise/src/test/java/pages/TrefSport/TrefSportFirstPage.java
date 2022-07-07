@@ -137,5 +137,6 @@ public class TrefSportFirstPage extends BaseHelper {
         navigateToHomePage();
         acceptCookie();
         selectOptionNavbar(numberOption, itemGroup);
+
     }
 }

@@ -23,6 +23,7 @@ public class BaseHelper {
 
     public void doubleClick(WebElement element) {
         new Actions(driver).moveToElement(element).doubleClick().build().perform();
+
     }
 
     public void hover(WebElement element) {
@@ -33,5 +34,5 @@ public class BaseHelper {
         return Integer.parseInt(priceString.replace(",00 RSD", "").replace(",20 RSD", "").replace(".", "").replace(">", ""));
     }
 
-    
+
 }

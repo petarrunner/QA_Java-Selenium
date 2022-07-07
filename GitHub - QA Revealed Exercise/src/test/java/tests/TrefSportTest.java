@@ -165,6 +165,7 @@ public class TrefSportTest extends BaseTest {
             Thread.sleep(5000); // Ostavljeno zbog vizuelne potvrde
         } catch (InterruptedException e) {
             e.printStackTrace();
+            
         }
     }
 }
