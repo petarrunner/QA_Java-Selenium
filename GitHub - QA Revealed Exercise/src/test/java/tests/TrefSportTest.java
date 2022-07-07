@@ -161,6 +161,10 @@ public class TrefSportTest extends BaseTest {
             Assert.assertTrue("Error - Price is lower than min price.", price >= orderpage.minPrice);
             Assert.assertTrue("Error - Price is higher than max price.", price <= orderpage.maxPrice);
         }
-
+        try {
+            Thread.sleep(5000); // Ostavljeno zbog vizuelne potvrde
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
