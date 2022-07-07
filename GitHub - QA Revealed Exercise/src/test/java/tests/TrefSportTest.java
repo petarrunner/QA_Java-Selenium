@@ -80,9 +80,7 @@ public class TrefSportTest extends BaseTest {
         for (int i = 1; i <= twoFive; i++) {
             System.out.println("* Item " + i + " *");
             firstpage.goToOrder();
-//            System.out.println("*** order page  ***");
             orderpage.orderItemsFinal();
-//            System.out.println("*** buy page ***");
             buypage.clickOnBuyButton();
         }
         buypage.goToCart();
@@ -113,7 +111,7 @@ public class TrefSportTest extends BaseTest {
         firstpageoutlet.goToOrder();
         orderpage.sortingAscendingFinal();
 
-        ArrayList<Double> listPrices = orderpage.listOfPricesAllAfter;
+        ArrayList<Integer> listPrices = orderpage.listOfPricesAllAfter;
         int listSize = orderpage.listOfPricesAllAfter.size();
         for (int i = 1; i < listSize; i++) {
             System.out.println("List after: " + listPrices.get(i));
@@ -125,5 +123,44 @@ public class TrefSportTest extends BaseTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void checkAvailableMaleTShirtL() {
+        int numberOption = 0;
+        String itemGroup = "Majice";
+        String size = "L";
+
+        TrefSportFirstPage firstpageoutlet = new TrefSportFirstPage(driver);
+        firstpageoutlet.selectOrderedOption(numberOption, itemGroup);
+        TrefSportOrderPage orderpage = new TrefSportOrderPage(driver);
+        orderpage.selectTShirt(size);
+
+        System.out.println("Available sizes => " + orderpage.availableSizes);
+        Assert.assertTrue("There is not an available T-Shirt in that chosen size", orderpage.availableSizes.contains(size));
+
+        try {
+            Thread.sleep(5000); // Ostavljeno zbog vizuelne potvrde
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void checkSetPriseRange() {
+        TrefSportFirstPage firstpageoutlet = new TrefSportFirstPage(driver);
+        firstpageoutlet.justNavigate();
+        firstpageoutlet.goToOrder();
+        TrefSportOrderPage orderpage = new TrefSportOrderPage(driver);
+        orderpage.selectPriceRange();
+        System.out.println(orderpage.listOfPricesAllAfter);
+        for (int price : orderpage.listOfPricesAllAfter
+        ) {
+            System.out.println("Assert => " + orderpage.minPrice + " <= " + price + " <= " + orderpage.maxPrice);
+            Assert.assertTrue("Error - Price is lower than min price.", price >= orderpage.minPrice);
+            Assert.assertTrue("Error - Price is higher than max price.", price <= orderpage.maxPrice);
+        }
+
     }
 }

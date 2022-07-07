@@ -24,8 +24,7 @@ public class TrefSportCheckAndConfirmPage extends BaseHelper {
 
     private void getFinalPrice() {
         wdWait.until(ExpectedConditions.presenceOfElementLocated(By.className("bill__value--highlight")));
-        finalPrice = opage.priceStringToDouble(finalPriceSpan.getText());
-//        finalPrice = Double.parseDouble(finalPriceSpan.getText().replace(",00 RSD", "").replace(",20 RSD", "").replace(".", ""));
+        finalPrice = opage.priceStringToInteger(finalPriceSpan.getText());
     }
 
     public void checkAndConfirm() {

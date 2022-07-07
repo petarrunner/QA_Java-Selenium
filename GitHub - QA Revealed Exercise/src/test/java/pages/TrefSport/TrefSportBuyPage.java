@@ -30,15 +30,10 @@ public class TrefSportBuyPage extends BaseHelper {
     TrefSportFirstPage fpage = new TrefSportFirstPage(driver);
     TrefSportOrderPage opage = new TrefSportOrderPage(driver);
 
-//    public double toDouble(String priceString) {
-//        double priceDouble = Double.parseDouble(priceString.replace(",00 RSD", "").replace(",20 RSD", "").replace(".", ""));
-//        return priceDouble;
-//    }
-
     private void getPrice() {
         wdWait.until(ExpectedConditions.presenceOfElementLocated(By.id("PageContentPlaceHolder_SpanPrice")));
         String price = priceSpan.getText();
-        double priceD = opage.priceStringToDouble(price);
+        double priceD = opage.priceStringToInteger(price);
         countingSumCart = countingSumCart + priceD;
     }
 

@@ -29,4 +29,7 @@ public class BaseHelper {
         new Actions(driver).moveToElement(element).build().perform();
     }
 
+    public int priceStringToInteger(String priceString) {
+        return Integer.parseInt(priceString.replace(",00 RSD", "").replace(",20 RSD", "").replace(".", "").replace(">", ""));
+    }
 }

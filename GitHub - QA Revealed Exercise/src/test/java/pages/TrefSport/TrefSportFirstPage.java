@@ -86,6 +86,24 @@ public class TrefSportFirstPage extends BaseHelper {
         js.executeScript("arguments[0].click();", listHoverElements.get(rndNmb).findElement(By.tagName("a")));
     }
 
+    private void selectOptionNavbar(int numberOption, String itemGroup) {
+        wdWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("header__menu-list-item")));
+        List<WebElement> listNavbar = driver.findElements(By.className("header__menu-list-item"));
+        Actions mousehover = new Actions(driver);
+        mousehover.moveToElement(listNavbar.get(numberOption)).build().perform();
+        wdWait.until(ExpectedConditions.presenceOfElementLocated(By.className("header__menu-dropdown")));
+        WebElement activeDropdown = listNavbar.get(numberOption);
+        List<WebElement> listHoverElements = activeDropdown.findElements(By.className("header__menu-dropdown-col"));
+        listHoverElements.remove(0);
+        listHoverElements.removeIf(n -> (n.getText().contains("Obuća")) || (n.getText().contains("Odeća")) || (n.getText().contains("OPREMA")) || (n.getText().contains("LOPTE")) || (n.getText().contains("Pištaljke")));
+        for (WebElement el :
+                listHoverElements)
+            if (itemGroup.contains(el.getText())) {
+                js.executeScript("arguments[0].click();", el.findElement(By.tagName("a")));
+                break;
+            }
+    }
+
     public void signIn(String email, String password) {
         navigateToHomePage();
         acceptCookie();
@@ -112,5 +130,11 @@ public class TrefSportFirstPage extends BaseHelper {
 
     public void goToOrder() {
         createNavbarListAndClick();
+    }
+
+    public void selectOrderedOption(int numberOption, String itemGroup) {
+        navigateToHomePage();
+        acceptCookie();
+        selectOptionNavbar(numberOption, itemGroup);
     }
 }

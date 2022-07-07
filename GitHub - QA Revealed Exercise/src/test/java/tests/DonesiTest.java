@@ -23,7 +23,7 @@ public class DonesiTest extends BaseTest {
         confirmpage.ClickOnButtonContinue();
 
         DonesiFoundedObjectsPage foundedpage = new DonesiFoundedObjectsPage(driver);
-        foundedpage.saljiTotalPodatke(orderNoList);
+        foundedpage.sendTotalData(orderNoList);
 
 
         int totalNumberOfObjects = Integer.parseInt(foundedpage.totalNumberOfObjects);
